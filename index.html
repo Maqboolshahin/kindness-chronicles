@@ -521,15 +521,14 @@
                 const storyIndex = stories.indexOf(story);
                 const storyCard = document.createElement('div');
                 storyCard.className = 'story-card';
-                storyCard.innerHTML = `
-                    <button class="heart-btn" onclick="toggleHeart(${storyIndex})">
-                        ♥<span class="heart-count">${story.hearts}</span>
-                    </button>
-                    <div class="story-category">${categoryNames[story.category] || story.category}</div>
-                    <div class="story-title">${story.title}</div>
-                    <div class="story-content">${story.content}</div>
-                    <div class="story-author">- ${story.author}</div>
-                `;
+                storyCard.innerHTML = 
+                    '<button class="heart-btn" onclick="toggleHeart(' + storyIndex + ')">' +
+                        '♥<span class="heart-count">' + story.hearts + '</span>' +
+                    '</button>' +
+                    '<div class="story-category">' + (categoryNames[story.category] || story.category) + '</div>' +
+                    '<div class="story-title">' + story.title + '</div>' +
+                    '<div class="story-content">' + story.content + '</div>' +
+                    '<div class="story-author">- ' + story.author + '</div>';
                 container.appendChild(storyCard);
             });
         }
@@ -547,7 +546,7 @@
                 heartBtn.classList.add('loved');
             }
             
-            heartBtn.innerHTML = `♥<span class="heart-count">${stories[index].hearts}</span>`;
+            heartBtn.innerHTML = '♥<span class="heart-count">' + stories[index].hearts + '</span>';
         }
 
         function submitStory(event) {
