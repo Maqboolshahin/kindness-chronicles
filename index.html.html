@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kindness Chronicles - Stories That Connect Us</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+            padding: 40px 0;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .main-content {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 2px solid #eee;
+        }
+
+        .nav-btn {
+            flex: 1;
+            padding: 15px;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #666;
+        }
+
+        .nav-btn.active {
+            background: white;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .nav-btn:hover {
+            background: #e9ecef;
+        }
+
+        .content-section {
+            padding: 30px;
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .story-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .stories-grid {
+            display: grid;
+            gap: 25px;
+        }
+
+        .story-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .story-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .story-title {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .story-content {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .story-author {
+            font-style: italic;
+            color: #888;
+            text-align: right;
+            font-size: 0.9rem;
+        }
+
+        .heart-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #ddd;
+        }
+
+        .heart-btn.loved {
+            color: #ff6b6b;
+        }
+
+        .heart-btn:hover {
+            transform: scale(1.2);
+        }
+
+        .heart-count {
+            font-size: 0.8rem;
+            color: #888;
+            margin-left: 5px;
+        }
+
+        .guidelines {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .guidelines h3 {
+            color: #1976d2;
+            margin-bottom: 10px;
+        }
+
+        .guidelines ul {
+            color: #555;
+            padding-left: 20px;
+        }
+
+        .guidelines li {
+            margin-bottom: 5px;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+            }
+            
+            .content-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Kindness Chronicles</h1>
+            <p>Stories that remind us kindness exists everywhere - in small gestures, unexpected help, and moments of human connection.</p>
+        </div>
+
+        <div class="main-content">
+            <div class="nav-buttons">
+                <button class="nav-btn active" onclick="showSection('read')">Read Stories</button>
+                <button class="nav-btn" onclick="showSection('share')">Share Your Story</button>
+                <button class="nav-btn" onclick="showSection('about')">About</button>
+            </div>
+
+            <div id="read-section" class="content-section active">
+                <div class="stories-grid" id="stories-container">
+                    <!-- Stories will be populated here -->
+                </div>
+            </div>
+
+            <div id="share-section" class="content-section">
+                <div class="guidelines">
+                    <h3>Story Guidelines</h3>
+                    <ul>
+                        <li>Share stories about kindness, connection, or hope</li>
+                        <li>Keep stories between 50-300 words</li>
+                        <li>Use first names only or remain anonymous</li>
+                        <li>Focus on positive, uplifting experiences</li>
+                        <li>Be respectful and inclusive</li>
+                    </ul>
+                </div>
+
+                <div class="success-message" id="success-message">
+                    Thank you for sharing your story! It has been added to our collection.
+                </div>
+
+                <form class="story-form" onsubmit="submitStory(event)">
+                    <div class="form-group">
+                        <label for="story-title">Story Title</label>
+                        <input type="text" id="story-title" name="title" placeholder="Give your story a meaningful title..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="story-content">Your Story</label>
+                        <textarea id="story-content" name="story" placeholder="Share your story of kindness, connection, or hope..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="story-author">Your Name (optional)</label>
+                        <input type="text" id="story-author" name="author" placeholder="First name only, or leave blank to remain anonymous">
+                    </div>
+
+                    <button type="submit" class="submit-btn">Share My Story</button>
+                </form>
+            </div>
+
+            <div id="about-section" class="content-section">
+                <h2 style="margin-bottom: 20px; color: #333;">About Kindness Chronicles</h2>
+                <p style="margin-bottom: 15px;">In a world that can sometimes feel divided, Kindness Chronicles celebrates the moments that bring us together. Every story shared here is a reminder that compassion exists everywhere, often in the smallest gestures.</p>
+                
+                <p style="margin-bottom: 15px;">Whether it's a stranger's smile on a difficult day, a neighbor's helping hand, or an unexpected act of generosity, these stories illuminate the threads that connect us all.</p>
+                
+                <p style="margin-bottom: 15px;">This is a safe, moderated space where authentic stories of human connection can be shared and celebrated. Every story matters, every voice counts.</p>
+                
+                <p><strong>Share your story and be part of something beautiful.</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample stories to populate the site
+        const sampleStories = [
+            {
+                title: "The Umbrella Stranger",
+                content: "It was pouring rain and I was stuck at the bus stop without an umbrella. A woman I'd never met came over and held her umbrella over both of us while we waited. We didn't talk much, just shared that small dry space. When my bus came, she smiled and said 'Stay dry!' It was such a simple thing, but it made my whole week better.",
+                author: "Maria",
+                hearts: 12
+            },
+            {
+                title: "Grocery Store Angels",
+                content: "I was at checkout with my toddler having a meltdown, groceries scattered, and my card got declined. I was mortified. The person behind me quietly stepped forward and paid for everything. They just said 'We've all been there' and helped me load my bags. I tried to get their contact info to pay them back, but they just smiled and walked away. Random kindness still exists.",
+                author: "Anonymous",
+                hearts: 8
+            },
+            {
+                title: "The Night Shift Coffee",
+                content: "Working the night shift at the hospital during COVID was exhausting. One morning, I found a coffee cart set up outside with a sign: 'Free coffee for healthcare workers.' The elderly man running it said his daughter was a nurse and this was his way of helping. He was there every morning for months, rain or shine, with a smile and fresh coffee.",
+                author: "Jake",
+                hearts: 15
+            }
+        ];
+
+        let stories = [...sampleStories];
+        let currentStoryId = 0;
+
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(`${sectionName}-section`).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+            
+            // If showing read section, refresh stories
+            if (sectionName === 'read') {
+                displayStories();
+            }
+        }
+
+        function displayStories() {
+            const container = document.getElementById('stories-container');
+            container.innerHTML = '';
+            
+            stories.forEach((story, index) => {
+                const storyCard = document.createElement('div');
+                storyCard.className = 'story-card';
+                storyCard.innerHTML = `
+                    <button class="heart-btn" onclick="toggleHeart(${index})">
+                        ♥<span class="heart-count">${story.hearts}</span>
+                    </button>
+                    <div class="story-title">${story.title}</div>
+                    <div class="story-content">${story.content}</div>
+                    <div class="story-author">- ${story.author}</div>
+                `;
+                container.appendChild(storyCard);
+            });
+        }
+
+        function toggleHeart(index) {
+            const heartBtn = document.querySelectorAll('.heart-btn')[index];
+            const isLoved = heartBtn.classList.contains('loved');
+            
+            if (isLoved) {
+                stories[index].hearts--;
+                heartBtn.classList.remove('loved');
+            } else {
+                stories[index].hearts++;
+                heartBtn.classList.add('loved');
+            }
+            
+            heartBtn.innerHTML = `♥<span class="heart-count">${stories[index].hearts}</span>`;
+        }
+
+        function submitStory(event) {
+            event.preventDefault();
+            
+            const title = document.getElementById('story-title').value;
+            const content = document.getElementById('story-content').value;
+            const author = document.getElementById('story-author').value || 'Anonymous';
+            
+            // Add new story to the beginning of the array
+            stories.unshift({
+                title: title,
+                content: content,
+                author: author,
+                hearts: 0
+            });
+            
+            // Show success message
+            document.getElementById('success-message').style.display = 'block';
+            
+            // Clear form
+            document.getElementById('story-title').value = '';
+            document.getElementById('story-content').value = '';
+            document.getElementById('story-author').value = '';
+            
+            // Hide success message after 3 seconds
+            setTimeout(() => {
+                document.getElementById('success-message').style.display = 'none';
+            }, 3000);
+            
+            // Switch to read section to show the new story
+            setTimeout(() => {
+                showSection('read');
+            }, 1500);
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            displayStories();
+        });
+    </script>
+</body>
+</html>
